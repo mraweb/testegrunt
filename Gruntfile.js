@@ -26,24 +26,25 @@ module.exports = function(grunt) {
   //               }
   //           }
   //       },
-		rsync: {
-			dist: {
-				src: './src/',
-				dest: './dist',
-				recursive: true,
-				syncDest: true,
-				exclude: ['main.*', 'less']
-			},
-            // uncomment and config
-			deploy: {
-				src: './dist/',
-				dest: '/public_html/testegrunt',
-				host: 'mrawebc@mraweb.com.br',
-				recursive: true,
-				syncDest: true
-			}
-		}
+		// rsync: {
+		// 	dist: {
+		// 		src: './src/',
+		// 		dest: './dist',
+		// 		recursive: true,
+		// 		syncDest: true,
+		// 		exclude: ['main.*', 'less']
+		// 	},
+		// uncomment and config
+		// 	deploy: {
+		// 		src: './dist/',
+		// 		dest: '/www/testegrunt',
+		// 		host: 'mrawebc@mraweb.com.br',
+		// 		recursive: true,
+		// 		syncDest: true
+		// 	}
+		// }
 	};
+
 	grunt.initConfig(gruntConfig);
 
 	var keys = Object.keys(gruntConfig);
@@ -54,8 +55,8 @@ module.exports = function(grunt) {
 	}
 
 	grunt.loadNpmTasks('grunt-yui-compressor');
-	grunt.loadNpmTasks('grunt-rsync');
 	grunt.loadNpmTasks('grunt-contrib-imagemin');
+	grunt.registerTask( 'deploy', [ 'ftp-deploy' ] );
     // uncomment for use less
 	// grunt.loadNpmTasks('grunt-contrib-less');
 	grunt.registerTask('default', tasks);
