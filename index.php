@@ -28,7 +28,7 @@
     </header><!-- FINAL HEADER -->
     
     <section id="content" role="main">
-        <p>MAIS UM TESTE</p>
+        
     </section><!-- FINAL CONTENT -->  
 </div>
 
