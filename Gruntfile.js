@@ -14,35 +14,27 @@ module.exports = function(grunt) {
                 dest: 'src/assets/css/style.min.css'
             }
         },
-        // uncomment for use less and comment cssmin configs
-		// less: {
-  //           development: {
-  //               options: {
-  //                   yuicompress: true
-  //               },
-  //               files: {
-  //                   "./src/assets/css/all.min.css":
-  //                   ["./src/assets/css/less/main.less"]
-  //               }
-  //           }
-  //       },
-		// rsync: {
-		// 	dist: {
-		// 		src: './src/',
-		// 		dest: './dist',
-		// 		recursive: true,
-		// 		syncDest: true,
-		// 		exclude: ['main.*', 'less']
-		// 	},
-		// uncomment and config
-		// 	deploy: {
-		// 		src: './dist/',
-		// 		dest: '/www/testegrunt',
-		// 		host: 'mrawebc@mraweb.com.br',
-		// 		recursive: true,
-		// 		syncDest: true
-		// 	}
-		// }
+        imagemin: {                          // Task
+		    // static: {                          // Target
+		    //   options: {                       // Target options
+		    //     optimizationLevel: 3,
+		    //     use: [mozjpeg()]
+		    //   },
+		    //   files: {                         // Dictionary of files
+		    //     'dist/img.png': 'src/img.png', // 'destination': 'source'
+		    //     'dist/img.jpg': 'src/img.jpg',
+		    //     'dist/img.gif': 'src/img.gif'
+		    //   }
+		    // },
+		    dynamic: {                         // Another target
+		      files: [{
+		        expand: true,                  // Enable dynamic expansion
+		        cwd: 'img',                   // Src matches are relative to this path
+		        src: ['**/*.{png,jpg,gif}'],   // Actual patterns to match
+		        dest: 'img/'                  // Destination path prefix
+		      }]
+		    }
+		  }
 	};
 
 	grunt.initConfig(gruntConfig);
@@ -56,8 +48,8 @@ module.exports = function(grunt) {
 
 	grunt.loadNpmTasks('grunt-yui-compressor');
 	grunt.loadNpmTasks('grunt-contrib-imagemin');
-	grunt.registerTask( 'deploy', [ 'ftp-deploy' ] );
-    // uncomment for use less
-	// grunt.loadNpmTasks('grunt-contrib-less');
+	grunt.registerTask('deploy', [ 'ftp-deploy' ]);
+	grunt.loadNpmTasks('grunt-contrib-imagemin');
+	grunt.registerTask('default', ['imagemin']);
 	grunt.registerTask('default', tasks);
 };
