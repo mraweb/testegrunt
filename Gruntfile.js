@@ -15,17 +15,6 @@ module.exports = function(grunt) {
             }
         },
         imagemin: {                          // Task
-		    // static: {                          // Target
-		    //   options: {                       // Target options
-		    //     optimizationLevel: 3,
-		    //     use: [mozjpeg()]
-		    //   },
-		    //   files: {                         // Dictionary of files
-		    //     'dist/img.png': 'src/img.png', // 'destination': 'source'
-		    //     'dist/img.jpg': 'src/img.jpg',
-		    //     'dist/img.gif': 'src/img.gif'
-		    //   }
-		    // },
 		    dynamic: {                         // Another target
 		      files: [{
 		        expand: true,                  // Enable dynamic expansion
@@ -34,7 +23,18 @@ module.exports = function(grunt) {
 		        dest: 'img/'                  // Destination path prefix
 		      }]
 		    }
-		  }
+		},
+		// htmlcompressor: {
+		//     compile: {
+		//       files: {
+		//         'index.php': 'index.php'
+		//       },
+		//       options: {
+		//         type: 'php',
+		//         preserveServerScript: true
+		//       }
+		//     }
+		// }
 	};
 
 	grunt.initConfig(gruntConfig);
@@ -46,6 +46,7 @@ module.exports = function(grunt) {
 		tasks.push(keys[i]);
 	}
 
+	// grunt.loadNpmTasks('grunt-htmlcompressor');
 	grunt.loadNpmTasks('grunt-yui-compressor');
 	grunt.loadNpmTasks('grunt-contrib-imagemin');
 	grunt.registerTask('deploy', [ 'ftp-deploy' ]);
